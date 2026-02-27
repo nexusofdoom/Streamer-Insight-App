@@ -1167,9 +1167,9 @@ class App:
         ytc.bind("<Configure>", _yt_redraw)
         ytc.after(60, _yt_redraw)
 
-        # Channel name sits directly under YouTube box inside stats_col
-        ext = tk.Frame(stats_col, bg=BG_PANEL2)
-        ext.pack(fill=tk.X, pady=0, side=tk.BOTTOM)
+        # Channel name sits directly under the profile picture and stats panels
+        ext = tk.Frame(p, bg=BG_PANEL2)
+        ext.pack(fill=tk.X, pady=(4, 0))
         self.channel_name_label = tk.Label(ext, text=AUTO_CHANNEL.upper(),
             fg=CHANNEL_NAME_COLOR, bg=BG_PANEL2,
             font=("Segoe UI", 13, "bold"), anchor="w")
