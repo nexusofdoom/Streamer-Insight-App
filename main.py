@@ -1003,16 +1003,31 @@ class App:
             c = tk.Canvas(parent, width=PW, height=PH, bg=BG_DARK, highlightthickness=0, bd=0)
             c.pack(side=tk.RIGHT, padx=(6, 0))
             
-            # 1. Force the absolute background to exactly match the top bar (Fixes the corners!)
+            # Force the absolute background to exactly match the top bar
             c.create_rectangle(0, 0, PW, PH, fill=BG_DARK, outline="") 
             
-            # 2. Draw the rounded gradient on top
+            # Draw the pill using the smooth rounded gradient
             _grad_rect(c, 1, 1, PW-1, PH-1, grad_top, grad_bot, steps=12, r=PR, tags="pill")
-            _round_rect(c, 1, 1, PW-1, PH-1, PR, tags="pill", fill="", outline=border_col)
             
-            # 3. Add the icon and text
+            # Draw a single, unified smooth rounded border on top
+            c.create_polygon(
+                1, 1+PR,  1, 1,  1+PR, 1,
+                PW-1-PR, 1,  PW-1, 1,  PW-1, 1+PR,
+                PW-1, PH-1-PR,  PW-1, PH-1,  PW-1-PR, PH-1,
+                1+PR, PH-1,  1, PH-1,  1, PH-1-PR,
+                smooth=True, fill="", outline=border_col, width=1, tags="pill"
+            )
+
+            # Draw sharp, straight lines over the top and bottom edges to cover any dark smoothing artifacts
+            c.create_line(1+PR, 1, PW-1-PR, 1, fill=border_col, width=1, tags="pill")
+            c.create_line(1+PR, PH-1, PW-1-PR, PH-1, fill=border_col, width=1, tags="pill")
+            c.create_line(1, 1+PR, 1, PH-1-PR, fill=border_col, width=1, tags="pill")
+            c.create_line(PW-1, 1+PR, PW-1, PH-1-PR, fill=border_col, width=1, tags="pill")
+
+            # Icon on left (will be replaced with real favicon once loaded)
             c.create_text(24, PH//2, text=icon_txt, fill=icon_col,
                           font=("Segoe UI", 15, "bold"), anchor="center", tags="icon")
+            # Divider
             c.create_line(46, 6, 46, PH-6, fill=border_col, width=1, tags="sep")
             c.create_text(PW//2 + 22, PH//2, text="OFFLINE", fill=FG_LIME,
                           font=("Segoe UI", 12, "bold"), anchor="center", tags="status")
