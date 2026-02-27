@@ -1000,7 +1000,8 @@ class App:
         PW, PH, PR = 175, 38, 9  # pill dimensions
 
         def _make_pill(parent, grad_top, grad_bot, border_col, icon_txt, icon_col):
-            c = tk.Canvas(parent, width=PW, height=PH, bg=BG_DARK, highlightthickness=0)
+            # Added bd=0 to fix the corner artifacts
+            c = tk.Canvas(parent, width=PW, height=PH, bg=BG_DARK, highlightthickness=0, bd=0)
             c.pack(side=tk.RIGHT, padx=(6, 0))
             _grad_rect(c, 1, 1, PW-1, PH-1, grad_top, grad_bot, steps=12, r=PR, tags="pill")
             _round_rect(c, 1, 1, PW-1, PH-1, PR, tags="pill", fill="", outline=border_col)
@@ -1013,8 +1014,9 @@ class App:
                           font=("Segoe UI", 12, "bold"), anchor="center", tags="status")
             return c
 
-        yt_pill = _make_pill(top_bar, "#250808", "#110303", "#441818", "▶", "#cc2020")
-        tw_pill = _make_pill(top_bar, "#180e28", "#0c0818", "#3a2060", "TW", "#6441a5")
+        # Lightened the gradient and border colors for both pills
+        yt_pill = _make_pill(top_bar, "#5e1414", "#2e0808", "#882222", "▶", "#cc2020")
+        tw_pill = _make_pill(top_bar, "#4e3080", "#2b1a4a", "#6441a5", "TW", "#6441a5")
 
         # Wire up wrapper objects so existing _update() code works unchanged
         self.live_dot       = _PillText(tw_pill)
