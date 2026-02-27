@@ -1024,7 +1024,8 @@ class App:
         self.mic_icon       = _Stub()
 
         # ── MAIN ROW: profile pic LEFT | right_col (stats + name) RIGHT ─────────
-        dash = tk.Frame(p, bg=BG_DARK)
+        dash = tk.Frame(p, bg=BG_DARK, height=175)
+        dash.pack_propagate(False)  # Forces the frame to stay exactly 175px tall
         dash.pack(fill=tk.X, pady=0)
 
         # Profile picture — strict 175×175, no padding, anchored to top of dash
