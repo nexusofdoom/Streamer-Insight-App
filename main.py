@@ -1063,7 +1063,7 @@ class App:
         TW_TOP = "#5a3090"; TW_BOT = "#1c0b44"; TW_HDR = "#3c1a70"
         TW_H   = 105
 
-        twc = tk.Canvas(stats_col, height=TW_H, bg=BG_DARK, highlightthickness=0)
+        twc = tk.Canvas(stats_col, height=TW_H, bg=BG_DARK, highlightthickness=0, bd=0)
         twc.pack(fill=tk.X, pady=0)
 
         _twi_hdr  = twc.create_text(0,0, text="TWITCH CHANNEL STATS", fill="white",
@@ -1111,7 +1111,7 @@ class App:
         YT_TOP = "#6e0c0c"; YT_BOT = "#160101"; YT_HDR = "#8b0000"
         YT_H   = 70
 
-        ytc = tk.Canvas(stats_col, height=YT_H, bg=BG_DARK, highlightthickness=0)
+        ytc = tk.Canvas(stats_col, height=YT_H, bg=BG_DARK, highlightthickness=0, bd=0)
         ytc.pack(fill=tk.X)
 
         _yti_hdr = ytc.create_text(0,0, text="YOUTUBE CHANNEL STATS", fill="white",
