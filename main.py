@@ -1000,15 +1000,19 @@ class App:
         PW, PH, PR = 175, 38, 9  # pill dimensions
 
         def _make_pill(parent, grad_top, grad_bot, border_col, icon_txt, icon_col):
-            # Added bd=0 to fix the corner artifacts
             c = tk.Canvas(parent, width=PW, height=PH, bg=BG_DARK, highlightthickness=0, bd=0)
             c.pack(side=tk.RIGHT, padx=(6, 0))
+            
+            # 1. Force the absolute background to exactly match the top bar
+            c.create_rectangle(0, 0, PW, PH, fill=BG_DARK, outline="") 
+            
+            # 2. Draw the rounded gradient on top
             _grad_rect(c, 1, 1, PW-1, PH-1, grad_top, grad_bot, steps=12, r=PR, tags="pill")
             _round_rect(c, 1, 1, PW-1, PH-1, PR, tags="pill", fill="", outline=border_col)
-            # Icon on left (will be replaced with real favicon once loaded)
+            
+            # 3. Add the icon and text
             c.create_text(24, PH//2, text=icon_txt, fill=icon_col,
                           font=("Segoe UI", 15, "bold"), anchor="center", tags="icon")
-            # Divider
             c.create_line(46, 6, 46, PH-6, fill=border_col, width=1, tags="sep")
             c.create_text(PW//2 + 22, PH//2, text="OFFLINE", fill=FG_LIME,
                           font=("Segoe UI", 12, "bold"), anchor="center", tags="status")
