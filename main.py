@@ -1772,13 +1772,15 @@ class App:
         popup.grab_set()
 
         popup.update_idletasks()
-        sh = popup.winfo_screenheight()
-        sw = popup.winfo_screenwidth()
         pw = 580
-        x  = max(0, min(self.root.winfo_x() + self.root.winfo_width() // 2 - pw // 2, sw - pw - 10))
-        y  = max(30, sh // 2 - 440)
+        ph = 960
+        # Center the popup relative to the main app window, ignoring primary screen bounds
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (pw // 2)
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (ph // 2)
+        
         popup.resizable(False, False)
-        popup.geometry(f"{pw}x960+{x}+{y}")
+        popup.geometry(f"{pw}x{ph}+{x}+{y}")
+
         _scroll_frame = popup  # no scroll needed — alias for btn_row compat
 
         # ── Title ────────────────────────────────────────────────────
