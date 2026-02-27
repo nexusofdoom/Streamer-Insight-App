@@ -1003,7 +1003,7 @@ class App:
             c = tk.Canvas(parent, width=PW, height=PH, bg=BG_DARK, highlightthickness=0, bd=0)
             c.pack(side=tk.RIGHT, padx=(6, 0))
             
-            # 1. Force the absolute background to exactly match the top bar
+            # 1. Force the absolute background to exactly match the top bar (Fixes the corners!)
             c.create_rectangle(0, 0, PW, PH, fill=BG_DARK, outline="") 
             
             # 2. Draw the rounded gradient on top
