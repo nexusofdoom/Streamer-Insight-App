@@ -3464,16 +3464,16 @@ class App:
             if target != "all":
                 tk.Frame(popup, bg="#2d2d3a", height=1).pack(fill=tk.X)
 
-        # Right-align popup with arrow button, clamp to screen on both sides
+        # Right-align popup with arrow button, without primary screen clamps
         popup.update_idletasks()
         pw = popup.winfo_reqwidth()
         ph = popup.winfo_reqheight()
         ax_right = (self.chat_send_arrow.winfo_rootx()
                     + self.chat_send_arrow.winfo_width())
         ay = self.chat_send_arrow.winfo_rooty()
-        sw = self.root.winfo_screenwidth()
-        x  = max(8, min(ax_right - pw, sw - pw - 8))
-        y  = ay - ph - 4
+        
+        x = ax_right - pw
+        y = ay - ph - 4
         popup.geometry(f"+{x}+{y}")
 
         # Close if focus leaves the popup entirely (not just to a child widget)
